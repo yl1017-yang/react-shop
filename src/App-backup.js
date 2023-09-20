@@ -1,15 +1,8 @@
-import { useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import './App.css';
 import bg from './img/bg.jpg';
-import data from './data.js';
-
 
 function App() {
-
-  let [shoes] = useState(data);
-  console.log(shoes[0].title);
-
   return (
     <div className="App">
 
@@ -26,22 +19,23 @@ function App() {
 
       <section className='main-bg' style={{ backgroundImage : 'url('+ bg +')' }}></section>
 
-      <div className="container">
-        <div className="row align-items-start">
-          <div className="col-md-4">
+      <div class="container">
+        <div class="row align-items-start">
+          <div class="col-md-4">
+            {/* <img src={process.env.PUBLIC_URL + '/logo192.png'} />  public 폴더 이미지 쓰는 권장방식 - process.env.PUBLIC_URL 내 사이트 경로임 */}
             <img src="https://cdn.pixabay.com/photo/2016/06/03/17/35/shoes-1433925_1280.jpg" width="100%"/>
-            <h4>{shoes[0].title}</h4>
-            <p>{shoes[0].price}</p>
+            <h4>상품명</h4>
+            <p>상품설명</p>
           </div>
-          <div className="col-md-4">
+          <div class="col-md-4">
             <img src="https://cdn.pixabay.com/photo/2014/05/18/11/26/shoes-346986_1280.jpg" width="100%"/>
-            <h4>{shoes[1].title}</h4>
-            <p>{shoes[1].price}</p>
+            <h4>상품명</h4>
+            <p>상품설명</p>
           </div>
-          <div className="col-md-4">
+          <div class="col-md-4">
             <img src="https://cdn.pixabay.com/photo/2018/12/17/23/39/baby-shoes-3881526_1280.jpg" width="100%"/>
-            <h4>{shoes[2].title}</h4>
-            <p>{shoes[2].price}</p>
+            <h4>상품명</h4>
+            <p>상품설명</p>
           </div>
         </div>
       </div>
@@ -49,7 +43,5 @@ function App() {
     </div>
   );
 }
-
-
 
 export default App;
