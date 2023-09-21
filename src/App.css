@@ -5,10 +5,16 @@
   font-style: normal;
 }
 
-html, body {
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select {
   font-family: 'Pretendard-Regular';
   font-weight: 400;
+  margin: 0;
+  padding: 0;
 }
+img,fieldset{border:0}
+ul,ol{list-style:none}
+a{color:#000;text-decoration:none}
+
 .App {
   text-align: center;
 }
@@ -17,6 +23,21 @@ html, body {
   background: #3a006f;
   padding: 20px 0;
   /* border-radius: 0 0 20px 20px; */
+}
+.navbar .navbar-brand {
+  font-size: 30px;
+  font-weight: bold;
+  margin-right: 50px;
+}
+.navbar .navbar-nav a {
+  display: inline-block;
+  color: #dfbbff;
+  font-size: 20px;
+  padding: 0 40px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+.navbar .navbar-nav a:hover {
+  color: #fff;
 }
 
 .main-bg {

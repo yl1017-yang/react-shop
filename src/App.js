@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import './App.css';
-import bg from './img/bg.jpg';
-import data from './data.js';
+import { useState } from 'react'
+import { Container, Nav, Navbar } from 'react-bootstrap'
+import './App.css'
+import bg from './img/bg.jpg'
+import data from './data.js'
+import { Routes, Route, Link } from 'react-router-dom'
+import Detail from './Detail.js'
 
 
 function App() {
@@ -11,45 +13,54 @@ function App() {
   console.log(shoes[0].title);
 
   return (
-    <div className="App">
+    <div className="App">      
 
       <Navbar data-bs-theme="dark" className="navbar">
         <Container>
           <Navbar.Brand href="#home">REACT SHOP</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Link to="/">홈</Link>
+            <Link to="/detail">상세페이지</Link>
           </Nav>
         </Container>
-      </Navbar>
+      </Navbar>      
 
-      <section className='main-bg' style={{ backgroundImage : 'url('+ bg +')' }}></section>
+      <Routes>
+        <Route path="/" element={
+          <>
+            <section className='main-bg' style={{ backgroundImage : 'url('+ bg +')' }}></section>
+            <div className="container">
+              <div className="row align-items-start">
+                {
+                  shoes.map((a, i)=> {
+                    return (
+                      <Card shoes={ shoes[i] } i={ i }></Card>
+                    )
+                  })
+                }
+              </div>
+            </div>
+          </>
+        } />
+        <Route path="/detail" element={Detail} />
+      </Routes>
 
-      <div className="container">
-        <div className="row align-items-start">
-          <div className="col-md-4">
-            <img src="https://cdn.pixabay.com/photo/2016/06/03/17/35/shoes-1433925_1280.jpg" width="100%"/>
-            <h4>{shoes[0].title}</h4>
-            <p>{shoes[0].price}</p>
-          </div>
-          <div className="col-md-4">
-            <img src="https://cdn.pixabay.com/photo/2014/05/18/11/26/shoes-346986_1280.jpg" width="100%"/>
-            <h4>{shoes[1].title}</h4>
-            <p>{shoes[1].price}</p>
-          </div>
-          <div className="col-md-4">
-            <img src="https://cdn.pixabay.com/photo/2018/12/17/23/39/baby-shoes-3881526_1280.jpg" width="100%"/>
-            <h4>{shoes[2].title}</h4>
-            <p>{shoes[2].price}</p>
-          </div>
-        </div>
-      </div>
+      
 
     </div>
   );
 }
 
+function Card(props) {
+  return (
+    <div className="col-md-4">
+      <img src={'https://codingapple1.github.io/shop/shoes'+ (props.i+1) +'.jpg'} width="80%" />
+      <h4>{ props.shoes.title }</h4>
+      <p>{ props.shoes.price }</p>
+    </div>
+  );
+}
 
+//리액트 라우터 1 : 셋팅이랑 기본 라우팅
 
 export default App;

@@ -1,7 +1,6 @@
 # 설치파일
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-npm install react-bootstrap bootstrap
+https://yl1017-yang.github.io/react-shop/
 
 ## Available Scripts
 
