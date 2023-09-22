@@ -13,6 +13,8 @@ function App() {
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
+            {/* <Link to="/">홈</Link>
+            <Link to="/detail">상세페이지</Link> */}
           </Nav>
         </Container>
       </Navbar>
@@ -57,6 +59,11 @@ function App() {
 // 2. 누가/detail 접속하면 그 컴포넌트 보여줌
 // react-router-dom 사용
 // npm install react-router-dom@6
+
+
+// 라우터 장점
+// 1. 뒤로가기 버튼 이용가능
+// 2. 페이지 이동의 쉬움
 
 
 export default App;

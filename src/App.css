@@ -11,15 +11,16 @@ body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,inpu
   margin: 0;
   padding: 0;
 }
-img,fieldset{border:0}
-ul,ol{list-style:none}
-a{color:#000;text-decoration:none}
+img,fieldset {border:0;}
+ul,ol {list-style:none;}
+a {color:#000;text-decoration:none;}
 
 .App {
   text-align: center;
 }
 
 .navbar {
+  flex-wrap: wrap;
   background: #3a006f;
   padding: 20px 0;
   /* border-radius: 0 0 20px 20px; */
@@ -27,13 +28,14 @@ a{color:#000;text-decoration:none}
 .navbar .navbar-brand {
   font-size: 30px;
   font-weight: bold;
+  padding: 0;
   margin-right: 50px;
 }
 .navbar .navbar-nav a {
   display: inline-block;
   color: #dfbbff;
-  font-size: 20px;
-  padding: 0 40px;
+  font-size: 18px;
+  padding: 0 20px !important;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 .navbar .navbar-nav a:hover {
