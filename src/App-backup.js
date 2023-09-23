@@ -1,10 +1,43 @@
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import './App.css';
-import bg from './img/bg.jpg';
+import { useState } from 'react'
+import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
+import { Container, Nav, Navbar } from 'react-bootstrap'
+import './App.css'
+import bg from './img/bg.jpg'
+import data from './data.js'
+import Detail from './pages/Detail.js'
+
+
+
+import styled from "styled-components";
+
+let YellowBtn = styled.button`
+  background : ${ props => props.bg };
+  color : ${ props => props.bg == 'blue' ? 'white' : 'black' };
+  padding : 10px;
+`
+let NewBtn = styled.button(YellowBtn)`
+  padding: 20px;
+`
+let Box = styled.div`
+  background : #f9f9f9;
+  padding : 20px;
+`
+
 
 function App() {
+
+  let [shoes] = useState(data);
+  console.log(shoes[0].title);
+  let navigate = useNavigate();  //페이지 이동 도와주는 함수  
+
   return (
     <div className="App">
+
+          <Box>
+            <button className="btn btn-danger">주문하기</button>
+            <YellowBtn bg="blue">노란색버튼</YellowBtn>
+            <YellowBtn bg="orange">오렌지버튼</YellowBtn>
+          </Box>
 
       <Navbar data-bs-theme="dark" className="navbar">
         <Container>
@@ -18,6 +51,8 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+
+      <Route path="/detail/:id" element={ <Detail shoes={shoes} /> } />
 
       <section className='main-bg' style={{ backgroundImage : 'url('+ bg +')' }}></section>
 
@@ -44,6 +79,36 @@ function App() {
 
     </div>
   );
+}
+
+
+function Detail(props) {  
+
+  let {id} = useParams();
+  console.log('파라미터' + id);
+
+   //상품 고유 id 사용하여 출력
+  let findShoes = props.shoes.find((data)=> { 
+    return data.id == id;
+  })
+  console.log(findShoes);
+ 
+
+  return (
+    <section className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        </div>
+        <div className="col-md-6">
+          <h4 className="pt-5">{ findShoes.title }</h4>
+          <p>{ props.shoes[id].content }</p>
+          <p>{ props.shoes[id].price }원</p>
+          <button className="btn btn-danger">주문하기</button> 
+        </div>
+      </div>
+    </section> 
+  )
 }
 
 // vive 사이트 참고

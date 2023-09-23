@@ -1,10 +1,17 @@
-# 설치파일
-
+# 깃 페이지
 https://yl1017-yang.github.io/react-shop/
 
-## Available Scripts
+## 리액트 git 배포
+https://velog.io/@bami/React-GitHub-Pages에-배포하기
+https://medium.com/hcleedev/web-react-프로젝트-github-pages로-배포하기-f62e59a2e210
+npm install gh-pages
+npm run deploy
 
-In the project directory, you can run:
+## 설치파일
+npx create-react-app react-shop
+npm install react-bootstrap bootstrap 
+npm install react-router-dom@6
+npm install styled-components
 
 ### `npm start`
 

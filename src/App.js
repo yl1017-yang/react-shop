@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import './App.css'
 import bg from './img/bg.jpg'
@@ -11,15 +11,7 @@ function App() {
 
   let [shoes] = useState(data);
   console.log(shoes[0].title);
-  let navigate = useNavigate();  //페이지 이동 도와주는 함수
-
-  
-  let dataId = shoes.filter(function(data, index){ 
-    console.log(index+'번째 내용');
-    return data.id === '1' 
-  });
-  console.log(dataId);
-  
+  let navigate = useNavigate();  //페이지 이동 도와주는 함수  
 
   return (
     <div className="App">
@@ -54,7 +46,7 @@ function App() {
           </>
         } />
 
-        <Route path="/detail/:id" element={ <Detail shoes={shoes} dataId={dataId} /> } />
+        <Route path="/detail/:id" element={ <Detail shoes={shoes} /> } />
         {/* url 파라미터 */}
 
         {/* nested router 기법 */}
@@ -103,7 +95,8 @@ function Card(props) {
   );
 }
 
-//리액트 라우터 1 : 셋팅이랑 기본 라우팅
+// Lifecycle과 useEffect 1
+
 // vive.naver.com
 
 
