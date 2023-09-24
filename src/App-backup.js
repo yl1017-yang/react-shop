@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import './App.css'
@@ -22,6 +22,34 @@ let Box = styled.div`
   background : #f9f9f9;
   padding : 20px;
 `
+
+
+// 컴포넌트의 Lifecycle
+// 페이지에 장착되가고하고 (mount)
+// 가끔 업데이트도 되고 (update)
+// 필요없으면 제거되거(unmount)
+
+// 예전스타일
+class Deatil2 extends React.Component {
+  componentDidMount(){
+    //컴포넌트 mount시 여기 코드 실행됨
+  }
+  componentDidUpdate(){
+    //컴포넌트 update시 여기 코드 실행됨
+  }
+  componentWillUnmount(){
+    //컴포넌트 삭제시 여기 코드 실행됨
+  }
+}
+
+  // 컴포넌트 훅(갈고리) 다는 법, useEffect 안에 있는 코드는 html 렌더링 후에 동작, 오래 걸리는 쓸데없는 코드는 useEffect에 작성해야 속도가 빨라짐
+  // useEffect 안에 적는 코드들은 - 어려운 연산 - 서버에서 데이터가져오는 작업 - 타이머 장착하는거
+  useEffect(()=>{
+    console.log('안녕');
+    // for (var i = 0; i < 10000; i++){
+    //   console.log(1);
+    // }
+  })
 
 
 function App() {
@@ -84,6 +112,12 @@ function App() {
 
 function Detail(props) {  
 
+
+
+    //update (재랜더링) 시 사용법
+    let [count, setCount] = useState(0)
+    let [alert, setAlert] = useState(true)
+
   let {id} = useParams();
   console.log('파라미터' + id);
 
@@ -92,10 +126,26 @@ function Detail(props) {
     return data.id == id;
   })
   console.log(findShoes);
+
+
+  useEffect(()=>{
+    console.log('안녕');
+
+    setTimeout(()=>{ 
+      setAlert(false);
+      console.log('3초 지나서 나와라');
+    }, 3000);
+  })
  
 
   return (
     <section className="container">
+      { alert &&
+        <div className='alert alert-warning'>
+          3초이내 구매시 할인
+        </div>
+      }
+
       <div className="row">
         <div className="col-md-6">
           <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
