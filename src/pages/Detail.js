@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 function Detail(props) {
 
    //update (재랜더링) 시 사용법
-   let [count, setCount] = useState(0)
-   let [alert, setAlert] = useState(true)
+   let [count, setCount] = useState(0);
+   let [alert, setAlert] = useState(true);
+  //  let [amount, setAmount] = useState(true);
  
    let { id } = useParams();
    console.log(typeof({ id }));
@@ -36,7 +37,7 @@ function Detail(props) {
 
   return (
     <section className="container">
-      { 
+      {
         alert == true
         ? <div className='alert alert-warning'>
           3초이내 구매시 할인
@@ -52,7 +53,14 @@ function Detail(props) {
           <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
         </div>
         <div className="col-md-6">
-          <input value={'input에 숫자말고 다른거 입력하면 경고 안내메시지 띄우기'}></input>
+
+          <input type="text" placeholder="input에 숫자말고 다른거 입력하면 경고 안내메시지 띄우기"  name="amount" onChange={(e)=>{ 
+            // let amount = e.target.value; 
+            // if (isNaN(amount) === true) {
+            //   setAmount(false);
+            // }            
+          }} />
+          
           <h4 className="pt-5">{ findShoes.title }</h4>
           <p>{ findShoes.content }</p>
           <p>{ findShoes.price }원</p>

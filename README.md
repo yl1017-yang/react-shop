@@ -16,6 +16,7 @@ npm install styled-components
 ## 동일강좌, 참고사이트
 https://velog.io/@brgndy/%EB%A6%AC%EC%95%A1%ED%8A%B8-URL-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0-%EC%A0%95%EB%A6%AC-useParams-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
 vive.naver.com
+https://react.vlpt.us/basic/15-array-modify.html
 
 ### `npm start`
 
