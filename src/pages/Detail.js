@@ -6,7 +6,7 @@ function Detail(props) {
    //update (재랜더링) 시 사용법
    let [count, setCount] = useState(0);
    let [alert, setAlert] = useState(true);
-  //  let [amount, setAmount] = useState(true);
+   let [num, setNum] = useState('');
  
    let { id } = useParams();
    console.log(typeof({ id }));
@@ -24,15 +24,19 @@ function Detail(props) {
     let a = setTimeout(()=>{ 
       setAlert(false);
       console.log('3초 지나서 나와라');
-    }, 3000)
-    console.log(2)
+    }, 3000);
+    
+
+    if (isNaN(num) == true){
+      alert('그러지마세요');
+    }
     
     return ()=> {
       // useEffect가 동작전에 실행됨, 매번실행되는 타이머 깨끗이 지우기
       console.log(1)
       clearTimeout(a);
     }
-  }, [])
+  }, [num])
 
 
   return (
@@ -54,11 +58,8 @@ function Detail(props) {
         </div>
         <div className="col-md-6">
 
-          <input type="text" placeholder="input에 숫자말고 다른거 입력하면 경고 안내메시지 띄우기"  name="amount" onChange={(e)=>{ 
-            // let amount = e.target.value; 
-            // if (isNaN(amount) === true) {
-            //   setAmount(false);
-            // }            
+          <input placeholder="input에 숫자말고 다른거 입력하면 경고 안내메시지 띄우기"  onChange={(e)=>{             
+            setNum(e.target.value)
           }} />
           
           <h4 className="pt-5">{ findShoes.title }</h4>

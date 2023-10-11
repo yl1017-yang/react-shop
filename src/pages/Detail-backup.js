@@ -93,6 +93,16 @@ function Detail(props) {
       <button onClick={()=>{ setCount(count+1) }}>업데이트 버튼</button>
 
       <div className="row">
+        
+        <input type="number" placeholder="input에 숫자말고 다른거 입력하면 경고 안내메시지 띄우기"  name="amount" onChange={(e)=>{ 
+            let amount = e.target.value; 
+            if (isNaN(amount) === true) {
+              setAmount(false);
+              // alert('아님');
+              // console.log(Number.isNaN(amount));
+            }
+          }} />
+
         <div className="col-md-6">
           <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
         </div>
