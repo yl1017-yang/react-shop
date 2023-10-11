@@ -5,7 +5,7 @@ function Detail(props) {
 
    //update (재랜더링) 시 사용법
    let [count, setCount] = useState(0);
-   let [alert, setAlert] = useState(true);
+   let [time, setTime] = useState(true);
    let [num, setNum] = useState('');
  
    let { id } = useParams();
@@ -22,13 +22,12 @@ function Detail(props) {
     console.log('안녕');
 
     let a = setTimeout(()=>{ 
-      setAlert(false);
+      setTime(false);
       console.log('3초 지나서 나와라');
     }, 3000);
     
-
     if (isNaN(num) == true){
-      alert('그러지마세요');
+      alert('숫자만 입력해');
     }
     
     return ()=> {
@@ -42,7 +41,7 @@ function Detail(props) {
   return (
     <section className="container">
       {
-        alert == true
+        time == true
         ? <div className='alert alert-warning'>
           3초이내 구매시 할인
         </div>
@@ -58,9 +57,7 @@ function Detail(props) {
         </div>
         <div className="col-md-6">
 
-          <input placeholder="input에 숫자말고 다른거 입력하면 경고 안내메시지 띄우기"  onChange={(e)=>{             
-            setNum(e.target.value)
-          }} />
+          <input placeholder="input에 숫자말고 다른거 입력하면 경고 안내메시지 띄우기"  onChange={(e)=>{ setNum(e.target.value) }} />
           
           <h4 className="pt-5">{ findShoes.title }</h4>
           <p>{ findShoes.content }</p>
