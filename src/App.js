@@ -7,7 +7,7 @@ import data from './data.js'
 import Detail from './pages/Detail.js'
 import About from './pages/About.js'
 import Event from './pages/Event.js'
-
+import axios from 'axios'
 
 function App() {
 
@@ -44,6 +44,19 @@ function App() {
                   })
                 }
               </div>
+              <button className="btn btn-primary" onClick={()=>{
+                // ajax 쓰려면 옵션 3개중 택1
+                // 1. XMLHttpRequest  2. fetch()   3. axios
+                axios.get('https://codingapple1.github.io/shop/data2.json')
+                .then((결과)=>{ 
+                  console.log(결과.data)
+                })
+                .catch(()=>{
+                  console.log('실패')
+                })
+
+              }}>버튼</button>
+              <div>버튼 누르면 html 생성 state 사용 - 리액트에서 서버와 통신하려면 ajax 1</div>
             </section>
           </>
         } />
