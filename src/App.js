@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate, Outlet, NavLink } from 'react-router-dom'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import './App.css'
@@ -9,12 +9,79 @@ import About from './pages/About.js'
 import Event from './pages/Event.js'
 import axios from 'axios'
 
+export let Context1 = createContext() //state 보관함
+
+
 function App() {
 
-  let [shoes] = useState(data);
-  console.log(shoes[0].title);
-  let navigate = useNavigate();  //페이지 이동 도와주는 함수  
+  let navigate = useNavigate();  //페이지 이동 도와주는 함수
+  let [shoes, setShoes] = useState(data);
+  let [재고] = useState([10, 11, 12]);
+  let [click, setClick] = useState(0);
+  let [hidden, setHidden] = useState(false);
+  let [loading, setLoading] = useState(false);
 
+  console.log(shoes[0].title);
+
+  let moreProduct = function() {
+    // https://sunshineyellow.tistory.com/134 참고
+
+    setLoading(true); // 로딩 상태를 true로 설정하여 로딩 중임을 표시
+
+    let url;
+    if (click === 1) {
+      url = 'https://codingapple1.github.io/shop/data2.json';
+    } else if (click === 2) {
+      url = 'https://codingapple1.github.io/shop/data3.json';
+    } else if (click > 2) {
+      setHidden(true);
+      setLoading(false);
+      // alert('상품없음');
+      return;
+    }
+    // { 
+    //   click === 1 && axios.get('https://codingapple1.github.io/shop/data2.json')
+    //   click === 2 && axios.get('https://codingapple1.github.io/shop/data3.json')
+    //   click === 3 && alert('상품없음');
+    // }
+
+
+    // ajax 쓰려면 옵션 3개중 택1
+    // 1. XMLHttpRequest  2. fetch()   3. axios
+    axios.get(url)
+    .then((res)=>{ 
+      console.log(res.data);
+      console.log(shoes);
+      let newProduct = res.data; // 가져온 데이터를 newProduct 변수에 저장
+      let copy = [...shoes, ...newProduct]; // 기존 상품 목록(props.shoes)과 새로운 상품(newProduct)을 합친 새로운 배열을 생성
+      setShoes(copy); // 합쳐진 상품 목록을 설정  
+      setLoading(false);
+    })
+    .catch(()=>{
+      console.log('실패');
+    })
+
+    // Promise.all([ axios.get('/url1'), axios.get('/url2') ])
+    // .then(()=>{
+    // })
+    // axios.post('/url1, {name : "kim"}')
+
+    // fetch('https://codingapple1.github.io/shop/data2.json')
+    // .then(결과 => 결과.json())
+    // .then(data=>{})
+  }
+
+  let buttonClick = function() {
+    setClick(click + 1); // 버튼 클릭 시 클릭 횟수를 1 증가시킴
+  }
+
+  useEffect(()=> {
+    if (click !== 0) {
+      moreProduct(); // 클릭 횟수가 0이 아니면 moreProduct 함수를 호출하여 추가 상품 가져오기
+    }
+  }, [click]);
+
+  
   return (
     <div className="App">
 
@@ -34,7 +101,7 @@ function App() {
         <Route path="/" element={
           <>
             <section className='main-bg' style={{ backgroundImage : 'url('+ bg +')' }}></section>
-            <section className="container">
+            <section className="content">
               <div className="row align-items-start">
                 {
                   shoes.map((a, i)=> {
@@ -44,24 +111,26 @@ function App() {
                   })
                 }
               </div>
-              <button className="btn btn-primary" onClick={()=>{
-                // ajax 쓰려면 옵션 3개중 택1
-                // 1. XMLHttpRequest  2. fetch()   3. axios
-                axios.get('https://codingapple1.github.io/shop/data2.json')
-                .then((결과)=>{ 
-                  console.log(결과.data)
-                })
-                .catch(()=>{
-                  console.log('실패')
-                })
 
-              }}>버튼</button>
-              <div>버튼 누르면 html 생성 state 사용 - 리액트에서 서버와 통신하려면 ajax 1</div>
+              {hidden && <Hidden />} 
+              {loading && <Loading />}
+          
+              {
+                hidden == false
+                ? <button className="btn btn-primary btn-lg" onClick={()=>{ buttonClick(); }}>더보기 버튼</button>
+                : null
+              }
+              
             </section>
+
           </>
         } />
 
-        <Route path="/detail/:id" element={ <Detail shoes={shoes} /> } />
+        <Route path="/detail/:id" element={ 
+          // <Context1.Provider value={{ 재고, shoes }}>
+            <Detail shoes={shoes} />
+          // </Context1.Provider>
+        }></Route>
         {/* url 파라미터 */}
 
         {/* nested router 기법 */}
@@ -77,8 +146,22 @@ function App() {
 
         <Route path="*" element={ <div>404page <br/> 없는 페이지</div> } />
       </Routes>
-      
+    </div>
+  )
+}
 
+function Hidden() {
+  return (
+    <div className="alert alert-warning">
+      상품이 더 없습니다.
+    </div>
+  )
+}
+
+function Loading() {
+  return (
+    <div className="alert alert-warning">
+      로딩중....
     </div>
   )
 }
@@ -94,9 +177,7 @@ function Card(props) {
 }
 
 
-// Lifecycle과 useEffect 2
-
-
-
-
 export default App;
+
+
+// 장바구니 페이지 만들기 & Redux 1 : Redux Toolkit 설치
