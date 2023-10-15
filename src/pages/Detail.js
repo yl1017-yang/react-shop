@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import { useParams } from "react-router-dom"
 import { Nav, Navbar } from 'react-bootstrap'
-
-import {Context1} from './../App.js'
+//import {Context1} from './../App.js'
 
 function Detail(props) {
 
-  let {재고, shoes} = useContext(Context1) //보관함 해체
+  //let {재고, shoes} = useContext(Context1) //보관함 해체
 
    //update (재랜더링) 시 사용법
    let [count, setCount] = useState(0);
@@ -113,7 +112,7 @@ function TabContent({탭}) {
   // }
 
   let [fade, setFade] = useState('')
-  let {재고, shoes} = useContext(Context1) //보관함 해체
+  //let {재고, shoes} = useContext(Context1) //보관함 해체
 
   useEffect(()=>{
     let a = setTimeout(()=>{ setFade('end') }, 100)    

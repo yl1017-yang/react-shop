@@ -12,6 +12,9 @@ npx create-react-app react-shop
 npm install react-bootstrap bootstrap 
 npm install react-router-dom@6
 npm install styled-components
+npm install axios
+npm install @reduxjs/toolkit react-redux  (react, react-dom : 18.1.x 이상이면 사용가능)
+
 
 ## 동일강좌, 참고사이트
 https://velog.io/@brgndy/%EB%A6%AC%EC%95%A1%ED%8A%B8-URL-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0-%EC%A0%95%EB%A6%AC-useParams-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0

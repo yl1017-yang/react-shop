@@ -1,12 +1,13 @@
-import { createContext, useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate, Outlet, NavLink } from 'react-router-dom'
-import { Container, Nav, Navbar } from 'react-bootstrap'
+import { createContext, useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, NavLink } from 'react-router-dom';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import './App.css'
 import bg from './img/bg.jpg'
 import data from './data.js'
 import Detail from './pages/Detail.js'
 import About from './pages/About.js'
 import Event from './pages/Event.js'
+import Cart from './pages/Cart.js'
 import axios from 'axios'
 
 export let Context1 = createContext() //state 보관함
@@ -16,7 +17,7 @@ function App() {
 
   let navigate = useNavigate();  //페이지 이동 도와주는 함수
   let [shoes, setShoes] = useState(data);
-  let [재고] = useState([10, 11, 12]);
+  // let [재고] = useState([10, 11, 12]);
   let [click, setClick] = useState(0);
   let [hidden, setHidden] = useState(false);
   let [loading, setLoading] = useState(false);
@@ -87,10 +88,11 @@ function App() {
 
       <Navbar data-bs-theme="dark" className="navbar">
         <Container>
-          <Navbar.Brand href="/">REACT SHOP</Navbar.Brand>
+          <Navbar.Brand href="#">REACT SHOP</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{ navigate('/') }}>홈</Nav.Link>
             <Nav.Link onClick={()=>{ navigate('/detail') }}>상세페이지</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate('/cart') }}>장바구니</Nav.Link>
             <Nav.Link onClick={()=>{ navigate('/about') }} activestyle={{color : "green"}}>회사소개</Nav.Link>
             <Nav.Link onClick={()=>{ navigate('/event') }} activeClassName="active">이벤트</Nav.Link>
           </Nav>
@@ -98,7 +100,7 @@ function App() {
       </Navbar>
       
       <Routes>
-        <Route path="/" element={
+        <Route exact path="/" element={
           <>
             <section className='main-bg' style={{ backgroundImage : 'url('+ bg +')' }}></section>
             <section className="content">
@@ -131,7 +133,8 @@ function App() {
             <Detail shoes={shoes} />
           // </Context1.Provider>
         }></Route>
-        {/* url 파라미터 */}
+        
+        <Route path="/cart" element={ <Cart/> } />
 
         {/* nested router 기법 */}
         <Route path="/about" element={ <About/> }>
