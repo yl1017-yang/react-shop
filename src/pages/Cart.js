@@ -1,6 +1,8 @@
+import { useParams } from "react-router-dom"
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeName, increase } from './../store/userSlice.js'
+import { increaseCart } from './../store/cartSlice.js'
 
 function Cart() {
 
@@ -8,12 +10,16 @@ function Cart() {
   //let a = useSelector((state)=> return state.user )
   console.log(state.cart[0])
   let dispatch = useDispatch()  //store.js로 요청보내주는 함수
+  // let { id } = useParams();
+  // console.log(typeof({ id }));
 
   return (
     <div>
 
-      <h2>{state.user.name} {state.user.age}의 장바구니</h2>
-      <button onClick={()=>{ dispatch(increase(100)) }}>버튼</button>
+      <div>
+        <h2>{state.user.name} {state.user.age}의 장바구니</h2>
+        <button onClick={()=>{ dispatch(increase(100)) }} className="btn btn-primary btn-lg">버튼</button>
+      </div>
 
       <Table>
         <thead>
@@ -33,8 +39,8 @@ function Cart() {
               <td>{ state.cart[i].count }</td>
               <td>
                 <button onClick={()=>{
-                  dispatch(changeName())
-                }}>+</button>
+                  dispatch(increaseCart(1))
+                }} className="btn btn-warning">수량 +</button>
               </td>
             </tr>
             )

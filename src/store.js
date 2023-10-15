@@ -1,5 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import user from './store/userSlice.js'
+import cart from './store/cartSlice.js'
 
 // Reduct의 state 변경하는 법
 // 1. state변경해주는 함수 만들기
@@ -10,15 +11,6 @@ import user from './store/userSlice.js'
 let stock = createSlice({
   name : 'stock',
   initialState : [10, 11, 12]
-})
-
-let cart = createSlice({
-  name : 'cart',
-  initialState : [
-    {id : 0, name : 'White and Black', count : 2},
-    {id : 2, name : 'Grey Yordan', count : 1},
-    {id : 3, name : 'Good shoes', count : 3},
-  ]
 })
 
 export default configureStore({
