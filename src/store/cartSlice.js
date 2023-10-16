@@ -10,6 +10,7 @@ let cart = createSlice({
   reducers : {
     increaseCart(state, action){
       state.count += action.payload
+      // return state.filter(state => state.id !== action.payload)
     }
   }
 })
