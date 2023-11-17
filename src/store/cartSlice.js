@@ -8,13 +8,14 @@ let cart = createSlice({
     {id : 3, name : 'Good shoes', count : 3},
   ],
   reducers : {
-    increaseCart(state = 0, action){
-      state.count += action.payload
-      // return state.filter(state => state.id !== action.payload)
+    addCount(state, action){
+      // state[action.payload].count++
+      let 번호 = state.findIndex((a)=>{ return a.id === action.payload })
+      state[번호].count++      
     }
   }
 })
 
-export let {increaseCart} = cart.actions
+export let {addCount} = cart.actions
 
 export default cart

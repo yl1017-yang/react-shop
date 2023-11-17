@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeName, increase } from './../store/userSlice.js'
-import { increaseCart } from './../store/cartSlice.js'
+import { addCount } from './../store/cartSlice.js'
 
 function Cart() {
 
@@ -39,11 +39,7 @@ function Cart() {
               <td>{ state.cart[i].name }</td>
               <td>{ state.cart[i].count }</td>
               <td>
-                {
-                  state.cart[i]
-                  ? <button onClick={()=>{ dispatch(increaseCart(1)) }} className="btn btn-warning">수량 +</button>
-                  : null
-                }
+                <button onClick={()=>{ dispatch(addCount(state.cart[i].id)) }} className="btn btn-warning">수량 +</button>
               </td>
             </tr>
             )
