@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeName, increase } from './../store/userSlice.js'
-import { addCount } from './../store/cartSlice.js'
+import { addCount, deleteItem, minusCount } from './../store/cartSlice.js'
 
 function Cart() {
 
@@ -25,10 +25,11 @@ function Cart() {
       <Table>
         <thead>
           <tr>
-            <th>#</th>
+            <th>순서</th>
             <th>상품명</th>
             <th>수량</th>
-            <th>변경하기</th>
+            <th colSpan={2}>변경하기</th>
+            <th>삭제</th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +40,22 @@ function Cart() {
               <td>{ state.cart[i].name }</td>
               <td>{ state.cart[i].count }</td>
               <td>
-                <button onClick={()=>{ dispatch(addCount(state.cart[i].id)) }} className="btn btn-warning">수량 +</button>
+                <button onClick={()=>{ 
+                  dispatch(addCount(state.cart[i].id)) 
+                }} className="btn btn-warning btn-sm">수량 +</button>
+              </td>
+              <td>
+                <button onClick={()=>{ 
+                  dispatch(minusCount(state.cart[i].id)) 
+                }} className="btn btn-warning btn-sm">수량 -</button>
+              </td>
+              <td>
+                <button onClick={()=>{
+                  dispatch(deleteItem(state.cart[i].id))
+                }} className="btn btn-secondary btn-sm">삭제</button>
+                {/* <button onClick={(e)=>{
+                  dispatch(deleteItem(e.target.parentElement))
+                }} className="btn btn-secondary btn-sm">삭제</button> */}
               </td>
             </tr>
             )

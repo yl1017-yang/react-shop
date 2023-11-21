@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 import { useParams } from "react-router-dom"
 import { Nav, Navbar } from 'react-bootstrap'
 //import {Context1} from './../App.js'
+import { addItem } from './../store/cartSlice.js'
+import { useDispatch } from 'react-redux';
 
 function Detail(props) {
 
@@ -12,6 +14,7 @@ function Detail(props) {
    let [time, setTime] = useState(true);
    let [num, setNum] = useState('');
    let [탭, 탭변경] = useState(0);
+   let dispatch = useDispatch();
 
  
    let { id } = useParams();
@@ -78,11 +81,20 @@ function Detail(props) {
           <p>{ findShoes.content }</p>
           <p>{ findShoes.price }원</p>
           
-          <button className="btn btn-danger">주문하기</button>
+
+          <button className="btn btn-danger" onClick={()=>{
+            // dispatch(addItem( {id : 4, name : 'New add cart', count : 2} ))
+            dispatch(addItem( {id : findShoes.id, name : findShoes.title, count : 1} ))
+          }}>주문하기</button>
+
+          {/* 1. 장바구니 항목 삭제
+          2. 중복상품은 추가 X, count만 1증가 */}
+
         </div>
       </div>
       
 
+      <br /><br /><br />
       <Nav variant="tabs" defaultActiveKey="link0">
         <Nav.Item>
           <Nav.Link onClick={()=>{ 탭변경(0) }} eventKey="link0">버튼0</Nav.Link>
