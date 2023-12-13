@@ -15,6 +15,19 @@ export let Context1 = createContext() //state 보관함
 
 function App() {
 
+  //localStroge(문자만 가능, json) - 개발자도구 - Application
+  //localStorage.setItem('age','20')    localStorage.getItem('age')     localStorage.removeItem('age')
+  let obj = {name : 'kim'}
+  localStorage.setItem('data', JSON.stringify(obj))
+  let 꺼낸거 = localStorage.getItem('data')
+  console.log(JSON.parse(꺼낸거).name);
+
+  //숙제 - 상세페이지에서 봤던 상품의 번호등을 localStorage에 저장하기  - wactched [0, 1]  set자료형
+  useEffect(()=>{
+    localStorage.setItem('watched', JSON.stringify( [0, 0] ))
+  },[])
+
+
   let navigate = useNavigate();  //페이지 이동 도와주는 함수
   let [shoes, setShoes] = useState(data);
   // let [재고] = useState([10, 11, 12]);
@@ -22,10 +35,12 @@ function App() {
   let [hidden, setHidden] = useState(false);
   let [loading, setLoading] = useState(false);
 
+
+
   console.log(shoes[0].title);
 
   let moreProduct = function() {
-    // https://sunshineyellow.tistory.com/134 참고
+    // https://sunshineyellow.tistory.com/134 참고    
 
     setLoading(true); // 로딩 상태를 true로 설정하여 로딩 중임을 표시
 
@@ -121,9 +136,19 @@ function App() {
                 hidden == false
                 ? <button className="btn btn-primary btn-lg" onClick={()=>{ buttonClick(); }}>더보기 버튼</button>
                 : null
-              }
-              
+              }              
             </section>
+
+            {/* 최근 본 상품 숙제 */}
+            <section className='recently'>
+              <h3>최근 본 상품</h3>
+              <ul>
+                <li><img src='https://codingapple1.github.io/shop/shoes1.jpg'/></li>
+                <li><img src='https://codingapple1.github.io/shop/shoes2.jpg'/></li>
+              </ul>
+              <div>TOP</div>
+            </section>
+
 
           </>
         } />
