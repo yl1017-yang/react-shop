@@ -15,20 +15,20 @@ export let Context1 = createContext() //state 보관함
 
 function App() {
 
-  //localStroge(문자만 가능, json) - 개발자도구 - Application
+  //localStroge(문자만 가능, array/abject 저장은 json 사용) - 개발자도구 - Application
   //localStorage.setItem('age','20')    localStorage.getItem('age')     localStorage.removeItem('age')
   let obj = {name : 'kim'}
   localStorage.setItem('data', JSON.stringify(obj))
   let 꺼낸거 = localStorage.getItem('data')
   console.log(JSON.parse(꺼낸거).name);
 
-    //숙제 - 상세페이지에서 봤던 상품의 번호등을 localStorage에 저장하기  - wactched [0, 1]  set자료형
+  
+  //숙제 - 상세페이지에서 봤던 상품의 번호등을 localStorage에 저장하기  - wactched [0, 1]  중복제거:set자료형
+  // 누가 Detail페이지 접속하면 그 페이지에 보이는 상품id 가져와서 localStorage에 Watched 항목에 추가 <- 자바스크립트로
   useEffect(()=>{
     localStorage.setItem('watched', JSON.stringify( [] ))
     
-  },[])
-
-  // 누가 Detail페이지 접속하면 그 페이지에 보이는 상품id 가져와서 localStorage에 Watched 항목에 추가 <- 자바스크립트로
+  },[])  
 
 
   let navigate = useNavigate();  //페이지 이동 도와주는 함수
@@ -37,7 +37,6 @@ function App() {
   let [click, setClick] = useState(0);
   let [hidden, setHidden] = useState(false);
   let [loading, setLoading] = useState(false);
-
 
 
   console.log(shoes[0].title);
@@ -143,11 +142,16 @@ function App() {
             </section>
 
             {/* 최근 본 상품 숙제 */}
-            <section className='recently'>
+            <section className="recently">
               <h3>최근 본 상품</h3>
               <ul>
-                <li><img src='https://codingapple1.github.io/shop/shoes1.jpg'/></li>
-                <li><img src='https://codingapple1.github.io/shop/shoes2.jpg'/></li>
+                {
+                  shoes.map((a, i)=> {
+                    return (
+                      <li><img src='https://codingapple1.github.io/shop/shoes1.jpg'/></li>
+                    )
+                  })
+                }
               </ul>
               <div>TOP</div>
             </section>

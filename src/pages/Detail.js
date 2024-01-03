@@ -32,7 +32,9 @@ function Detail(props) {
     let 꺼낸거 = localStorage.getItem('watched')
     꺼낸거 = JSON.parse(꺼낸거)
     꺼낸거.push(findShoes.id)
-    꺼낸거 = new Set(꺼낸거) //중복제거 if문 써두됨
+
+     //중복제거 if문 써두됨 Set으로 바꿨다가 다시 array로 만들기
+    꺼낸거 = new Set(꺼낸거)
     꺼낸거 = Array.from(꺼낸거)
     localStorage.setItem('watched', JSON.stringify(꺼낸거))
 
