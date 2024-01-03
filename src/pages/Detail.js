@@ -15,7 +15,6 @@ function Detail(props) {
    let [num, setNum] = useState('');
    let [탭, 탭변경] = useState(0);
    let dispatch = useDispatch();
-
  
    let { id } = useParams();
    console.log(typeof({ id }));
@@ -24,7 +23,21 @@ function Detail(props) {
    let findShoes = props.shoes.find((data)=> { 
      return data.id == id
    });
-   console.log(findShoes);
+   console.log(findShoes.id);
+
+  
+   // 최근 본 상품
+  useEffect(()=>{
+
+    let 꺼낸거 = localStorage.getItem('watched')
+    꺼낸거 = JSON.parse(꺼낸거)
+    꺼낸거.push(findShoes.id)
+    꺼낸거 = new Set(꺼낸거) //중복제거 if문 써두됨
+    꺼낸거 = Array.from(꺼낸거)
+    localStorage.setItem('watched', JSON.stringify(꺼낸거))
+
+  },[])
+
 
   // 컴포넌트 mount, update 시 실행됨
   useEffect(()=>{
@@ -107,6 +120,18 @@ function Detail(props) {
         </Nav.Item>
       </Nav>
       <TabContent shoes={props.shoes} 탭={탭}/>
+
+
+      {/* 최근 본 상품 숙제 */}
+      <section className='recently'>
+        <h3>최근 본 상품</h3>
+        <ul>
+          <li><img src='https://codingapple1.github.io/shop/shoes1.jpg'/></li>
+          <li><img src='https://codingapple1.github.io/shop/shoes2.jpg'/></li>
+        </ul>
+        <div>TOP</div>
+      </section>
+
 
     </section> 
   )
