@@ -28,10 +28,13 @@ function App() {
   let 꺼낸거 = localStorage.getItem('data')
   console.log(JSON.parse(꺼낸거).name);
 
+  
   //숙제 - 상세페이지에서 봤던 상품의 번호등을 localStorage에 저장하기  - wactched [0, 1]  중복제거:set자료형
+  // 누가 Detail페이지 접속하면 그 페이지에 보이는 상품id 가져와서 localStorage에 Watched 항목에 추가 <- 자바스크립트로
   useEffect(()=>{
-    localStorage.setItem('watched', JSON.stringify( [0, 0] ))
-  },[])
+    localStorage.setItem('watched', JSON.stringify( [] ))
+    
+  },[])  
 
 
   let navigate = useNavigate();  //페이지 이동 도와주는 함수
