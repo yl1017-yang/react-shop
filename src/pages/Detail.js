@@ -5,7 +5,15 @@ import { Nav, Navbar } from 'react-bootstrap'
 import { addItem } from './../store/cartSlice.js'
 import { useDispatch } from 'react-redux';
 
+
+var a = 0;
+
 function Detail(props) {
+
+// for(var i = 0; i < 1e9; i++){
+//   a = 1;
+// }
+
 
   //let {재고, shoes} = useContext(Context1) //보관함 해체
 

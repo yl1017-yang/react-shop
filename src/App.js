@@ -1,14 +1,20 @@
-import { createContext, useEffect, useState } from 'react';
+import { lazy, Suspense, createContext, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, NavLink } from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import './App.css'
 import bg from './img/bg.jpg'
 import data from './data.js'
-import Detail from './pages/Detail.js'
 import About from './pages/About.js'
 import Event from './pages/Event.js'
-import Cart from './pages/Cart.js'
 import axios from 'axios'
+import { useQuery } from 'react-query';
+
+
+// import Detail from './pages/Detail.js'
+// import Cart from './pages/Cart.js'
+const Detail = lazy( () => import('./pages/Detail.js') );
+const Cart = lazy( () => import('./pages/Cart.js') );
+
 
 export let Context1 = createContext() //state 보관함
 
@@ -96,6 +102,15 @@ function App() {
     }
   }, [click]);
 
+
+  
+  let result = useQuery('작명', ()=>{
+    return axios.get('https://codingapple1.github.io/userdata.json').then((a)=>{
+      console.log('요청됨')
+      return a.data
+    }),
+    { staleTime : 2000 } // 2초 자동 refetch(가져오기)
+  })
   
   return (
     <div className="App">
@@ -110,9 +125,18 @@ function App() {
             <Nav.Link onClick={()=>{ navigate('/about') }} activestyle={{color : "green"}}>회사소개</Nav.Link>
             <Nav.Link onClick={()=>{ navigate('/event') }} activeClassName="active">이벤트</Nav.Link>
           </Nav>
+          <Nav className="me-auto">
+            {/* { result.isLoading ? '로딩중' : result.data.name } */}
+            { result.isLoading && '로딩중' }
+            { result.error && '에러남' }
+            { result.data && result.data.name }
+          </Nav>
+
         </Container>
       </Navbar>
       
+
+      <Suspense fallback={ <div>로딩중임</div> }>
       <Routes>
         <Route exact path="/" element={
           <>
@@ -178,6 +202,9 @@ function App() {
 
         <Route path="*" element={ <div>404page <br/> 없는 페이지</div> } />
       </Routes>
+      
+      </Suspense>
+
     </div>
   )
 }

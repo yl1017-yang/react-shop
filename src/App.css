@@ -31,6 +31,7 @@ a {color:#000;text-decoration:none;}
   flex-wrap: wrap;
   background: #3a006f;
   padding: 20px 0;
+  color: #fff;
   /* border-radius: 0 0 20px 20px; */
 }
 .navbar .navbar-brand {
