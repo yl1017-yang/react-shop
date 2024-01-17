@@ -1,8 +1,16 @@
+import { memo, useState } from 'react';
 import { useParams } from "react-router-dom"
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeName, increase } from './../store/userSlice.js'
 import { addCount, deleteItem, minusCount } from './../store/cartSlice.js'
+
+
+let Child = memo (function Child() {
+  console.log('재렌더링됨')
+  return <div> ++++ 자식임 memo는 자식컴포넌트 재랜더링 막아줌 ++++ </div>
+})
+
 
 function Cart() {
 
@@ -10,12 +18,17 @@ function Cart() {
   //let a = useSelector((state)=> return state.user )
   console.log(state.cart[0])
   let dispatch = useDispatch()  //store.js로 요청보내주는 함수
+  let [count, setCount] = useState(0)
+
 
   let { id } = useParams();
   console.log(typeof({ id }));
 
   return (
     <div>
+
+      <Child count={count}></Child>  {/* 자식컴포넌트는 재던리딩 됨 */}
+      <button onClick={()=>{ setCount(count+1) }}> 재랜더링 + </button>
 
       <div>
         <h2>{state.user.name} {state.user.age}의 장바구니</h2>
