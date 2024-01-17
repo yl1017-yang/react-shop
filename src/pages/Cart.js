@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { useParams } from "react-router-dom"
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,8 +11,15 @@ let Child = memo (function Child() {
   return <div> ++++ 자식임 memo는 자식컴포넌트 재랜더링 막아줌 ++++ </div>
 })
 
+function 함수(){
+  return <div>반복문10억번</div>
+}
+
 
 function Cart() {
+
+  let result = 함수();
+  useMemo(()=>{return 함수()})
 
   let state = useSelector((state)=>{ return state })  //Redux store 가져와줌
   //let a = useSelector((state)=> return state.user )
